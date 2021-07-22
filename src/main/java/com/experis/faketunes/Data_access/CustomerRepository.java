@@ -356,22 +356,27 @@ public class CustomerRepository {
             conn = DriverManager.getConnection(URL);
 
             // make sql query
+            // https://www.geeksforgeeks.org/sql-with-clause/
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("");
+                    conn.prepareStatement("WITH mostPopularGenres AS" +
+                            " (SELECT Customer.FirstName, Genre.Name, COUNT(Track.GenreId) as mostTracks" +
+                            " FROM Customer" +
+                            " INNER JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId" +
+                            " INNER JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId" +
+                            " INNER JOIN Track ON InvoiceLine.TrackId = Track.TrackId" +
+                            " INNER JOIN GENRE ON Track.GenreId = Genre.GenreId" +
+                            " WHERE Customer.CustomerId=?" +
+                            " GROUP BY Genre.GenreId)" +
+                            " SELECT FirstName, Name, mostTracks FROM mostPopularGenres" +
+                            " WHERE (SELECT MAX(mostTracks) FROM mostPopularGenres) = mostTracks");
 
             // execute query
             preparedStatement.setString(1, customerId);
             ResultSet set = preparedStatement.executeQuery();
-
             while(set.next()){
                 customerGenres.add(new CustomerGenre(
-                        set.getString("CustomerId"),
                         set.getString("FirstName"),
-                        set.getString("LastName"),
-                        set.getString("Country"),
-                        set.getString("PostalCode"),
-                        set.getString("Phone"),
-                        set.getString("Email"),
+                        set.getString("Name"),
                         set.getString("mostTracks")
                 ));
             }
