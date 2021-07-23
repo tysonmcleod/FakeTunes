@@ -12,6 +12,9 @@ public class CustomerGenre {
         this.mostTracks = mostTracks;
     }
 
+    public CustomerGenre(String name) {
+    }
+
     // getters and setters
 
 

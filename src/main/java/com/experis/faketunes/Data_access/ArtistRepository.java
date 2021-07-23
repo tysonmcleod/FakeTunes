@@ -2,16 +2,18 @@ package com.experis.faketunes.Data_access;
 
 import com.experis.faketunes.Models.Artist;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import static com.experis.faketunes.Data_access.ConnectionHelper.CONNECTION_URL;
 
 public class ArtistRepository {
 
-    //Lägg till själva URL:en
-
-    /*
+    //Set up connection
+    private String URL = CONNECTION_URL;
+    private Connection conn = null;
 
     public ArrayList<Artist> getAllAlbum() {
         ArrayList<Artist> Artist = new ArrayList<>();
@@ -22,13 +24,14 @@ public class ArtistRepository {
             PreparedStatement prep =
                     conn.prepareStatement("SELECT name, artistId FROM Artist");
             ResultSet set = prep.executeQuery();
+
             while (set.next()) {
                 Artist.add(new Artist(
                         set.getString("name"),
                         set.getInt("artistId")
                 ));
             }
-            System.out.println("Get all went well!");
+
 
         } catch (Exception exception) {
             System.out.println(exception.toString());
@@ -71,5 +74,5 @@ public class ArtistRepository {
         // ---
         return success;
 
-    }*/
+    }
 }
