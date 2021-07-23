@@ -1,9 +1,7 @@
 package com.experis.faketunes.Controllers.api;
 import com.experis.faketunes.Data_access.CustomerRepository;
-import com.experis.faketunes.Models.Customer;
-import com.experis.faketunes.Models.CustomerCountry;
-import com.experis.faketunes.Models.CustomerGenre;
-import com.experis.faketunes.Models.CustomerSpender;
+import com.experis.faketunes.Data_access.SearchRepository;
+import com.experis.faketunes.Models.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.ValueExp;
@@ -82,4 +80,12 @@ public class CustomerController {
         return customerRepository.getCustomerMostPopularGenre(id);
     }
 
+    /*
+    //test
+    SearchRepository searchRepository = new SearchRepository();
+    @RequestMapping(value="/api/customers/searchresults/{id}", method = RequestMethod.GET)
+    public ArrayList<Search> searchTrack(@PathVariable (value = "id") String id){
+        return searchRepository.search(id);
+    }
+    */
 }

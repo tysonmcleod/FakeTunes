@@ -4,39 +4,65 @@
     <meta charset="UTF-8">
     <title>Trying to create a fake iTunes</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/actions.js}"></script>
 </head>
 <body>
 
-<h1> This is the greatest fake iTunes</h1>
+<h1> The greatest fake iTunes</h1>
+<h2> bestCSS&trade;</h2>
 
-<div class="contain inner-padded">
-    <div class="row justify-content-center align-items-center" style="padding-bottom: 2em;">
-        <h3 class="display-3"> 5 artists</h3>
-        <div th:each="artist:${artists}" class="col">
-            <h5 th:text="${artist.getName()}"></h5>
+<div class ="container">
+    <h2> TOP 5 </h2>
+    <div class="row">
+
+        <div class col>
+            <div class="bordybordy">
+                <h3 class="display-3"> 5 artists</h3>
+                <div th:each="artist:${artists}" class="col">
+                    <h5 th:text="${artist.getName()}"></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class col>
+            <div class="bordybordy">
+                <h3 class="display-3"> 5 tracks</h3>
+                <div th:each="track:${tracks}" class="col">
+                    <h5 th:text="${track.getName()}"></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class col>
+            <div class="bordybordy">
+                <h3 class="display-3"> 5 genres</h3>
+                <div th:each="genre:${genres}" class="col">
+                    <h5 th:text="${genre.getName()}"></h5>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row justify-content-center align-items-center" style="padding-bottom: 2em;">
-        <h3 class="display-3"> 5 tracks</h3>
-        <div th:each="track:${tracks}" class="col">
-            <h5 th:text="${track.getName()}"></h5>
-        </div>
+
+
+    <h2>SEARCH</h2>
+    <div class="bordybordy">
+        <form th:action="@{/search}" onsubmit="return validateForm()" method="get" required>
+            <input type="text" id="fname" th:name="searchString"><br><br>
+            <button type="submit"> Search.. </button>
+        </form>
     </div>
-
-    <div class="row justify-content-center align-items-center" style="padding-bottom: 2em;">
-        <h3 class="display-3"> 5 genres</h3>
-        <div th:each="genre:${genres}" class="col">
-            <h5 th:text="${genre.getName()}"></h5>
-        </div>
-    </div>
-
-
-
 </div>
 
 
 <button type="button" th:onclick="showAlert()">Like Button</button>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
