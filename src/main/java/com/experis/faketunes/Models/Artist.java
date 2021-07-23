@@ -4,9 +4,8 @@ public class Artist {
     private String name;
     private int artistId;
 
-    public Artist () {
 
-    }
+
     public Artist (String name, int artistId) {
         this.artistId = artistId;
         this.name = name;

@@ -5,9 +5,6 @@ public class Album {
     private String name;
     private int artistId;
 
-    public Album(){
-
-    }
     public Album (int albumId, String name, int artistId) {
         this.albumId = albumId;
         this.name = name;

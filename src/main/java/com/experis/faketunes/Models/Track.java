@@ -5,9 +5,7 @@ public class Track {
     private String name;
     //private int artistID;
 
-    public  Track () {
 
-    }
     public Track (String trackID, String name) {
         this.trackID = trackID;
         this.name = name;
