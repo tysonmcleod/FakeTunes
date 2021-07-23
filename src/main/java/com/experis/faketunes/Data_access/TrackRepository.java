@@ -46,6 +46,7 @@ public class TrackRepository {
 
         return Track;
     }
+
     public Boolean addTrack(Track track) {
         Boolean success = false;
         try {
@@ -75,38 +76,40 @@ public class TrackRepository {
         // ---
         return success;
     }
-    public Track getSpecificTrack(String id){
-        Track track = null;
-        // ---
-        try{
+
+    public Track getSpecificTrack(String name) {
+        Track specificTracks = null;
+
+        try {
             // connect
             conn = DriverManager.getConnection(URL);
-            PreparedStatement prep =
-                    conn.prepareStatement("SELECT trackId, name, " +
-                            "FROM Track WHERE name=?");
-            prep.setString(1,id);
-            ResultSet set = prep.executeQuery();
-            while(set.next()){
-                track = new Track(
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT trackId, name FROM Track WHERE name LIKE ?");
+            preparedStatement.setString(1, name);
+            ResultSet set = preparedStatement.executeQuery();
+
+            while (set.next()) {
+               specificTracks  = new Track(
                         set.getString("trackId"),
                         set.getString("name")
                 );
             }
-            System.out.println("Get specific went well!");
-
-        }catch(Exception exception){
+        }
+        catch (Exception exception) {
             System.out.println(exception.toString());
         }
         finally {
-            try{
+            try {
                 conn.close();
-            } catch (Exception exception){
+            }
+            catch (Exception exception) {
                 System.out.println(exception.toString());
             }
         }
-        // ---
 
-        return track;
+
+        return specificTracks;
     }
+
 }
 

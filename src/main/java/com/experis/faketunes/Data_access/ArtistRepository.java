@@ -15,8 +15,8 @@ public class ArtistRepository {
     private String URL = CONNECTION_URL;
     private Connection conn = null;
 
-    public ArrayList<Artist> getAllAlbum() {
-        ArrayList<Artist> Artist = new ArrayList<>();
+    public ArrayList<Artist> getAllArtist() {
+        ArrayList<Artist> artists = new ArrayList<>();
 
         try {
             // connect
@@ -26,7 +26,7 @@ public class ArtistRepository {
             ResultSet set = prep.executeQuery();
 
             while (set.next()) {
-                Artist.add(new Artist(
+                artists.add(new Artist(
                         set.getString("name"),
                         set.getInt("artistId")
                 ));
@@ -43,7 +43,7 @@ public class ArtistRepository {
             }
         }
 
-        return Artist;
+        return artists;
     }
     public Boolean addArtist(Artist artist) {
         Boolean success = false;
